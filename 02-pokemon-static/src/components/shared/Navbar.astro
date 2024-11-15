@@ -1,0 +1,67 @@
+---
+const links = [
+    {href: "/", text:"Listado"},
+    {href: "/pokemons/1", text:"Paginado"},
+    {href: "/favorites", text:"Favoritos"},
+    {href: "/islands", text:"Islas"},
+]
+
+
+const currentPath = Astro.url.pathname
+
+
+---
+
+<nav class="shadow bg-slate-900">
+    <div class="container flex items-center justify-center p-6 mx-auto text-gray-600 capitalize dark:text-gray-300">
+        
+        <!-- {
+         links.map(({href, text}) => (
+            <a 
+                href={href} 
+                class:list={
+                    [
+                        "text-gray-800 dark:text-gray-200  mx-1.5 sm:mx-6",
+                        {
+                            "border-b-2 border-blue-500": (currentPath == href),
+                        }
+                    ] 
+                }
+        
+            >
+                {text}
+            </a>
+        ))
+      } -->
+
+      {
+        links.map(({href, text}) => (
+            <div>  
+                <a 
+                    href={href} 
+                    class="text-gray-800 dark:text-gray-200  mx-1.5 sm:mx-6"
+                >
+                    {text}
+                </a>
+
+                {currentPath == href ? (
+                    <div 
+                        transition:name="menu-line" 
+                        class="border-b-2 border-blue-500 mx-4"
+                    />
+                    //Como mapeo 3 el div cada uno tiene su correspondiente transtion name por ende la animacion funciona.
+                ): (
+                    <div class="border-b-2 border-transparent"/>
+                    //Esto lo hago para que todos tengan el mismo nivel, pero los que no estan activo esto no se note.
+                )
+                }
+
+
+                {/* <div class="border-b-2 border-blue-500 mx-4"/> */}
+
+                
+            </div>
+       ))
+     }
+    </div>
+</nav>
